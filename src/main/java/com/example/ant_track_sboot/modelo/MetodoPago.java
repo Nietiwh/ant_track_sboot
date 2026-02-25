@@ -17,7 +17,7 @@ public class MetodoPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, length = 50)
+    @Column(name = "id", nullable = false, length = 50) 
     private Long id;
 
     @Column(name = "forma_pago", nullable = false, length = 50)
