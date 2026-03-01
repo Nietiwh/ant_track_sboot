@@ -21,7 +21,7 @@ public class Gasto {
     private String descripcion;
 
     @Column(name = "valor", nullable = false) //Columna obligatoria
-    private Double valor;
+    private double valor;
     
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
