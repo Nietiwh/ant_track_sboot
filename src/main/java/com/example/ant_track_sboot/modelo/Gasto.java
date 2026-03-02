@@ -26,11 +26,14 @@ public class Gasto {
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
 
-    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir
-    private Categoria categoria;
+    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, pero julian ya hizo la clase
+    private CategoriaEnum categoria;  // falta relacionarla
 
-    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir
+    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, se deria de relacionar con Metodo de pago
     private MedioPago medioPago;
+
+    @Column(name = "usuario", nullable = false) // se debe relacionar con la Clase Usuario.
+    private Usuario usuario;
 
   
     //Constructor vacio
@@ -38,14 +41,15 @@ public class Gasto {
     }
 
     //Constructor full
-    public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, Categoria categoria,
-            MedioPago medioPago, String observaciones) {
+    public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, CategoriaEnum categoria,
+            MedioPago medioPago, String observaciones, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
         this.valor = valor;
         this.fecha = fecha;
         this.categoria = categoria;
         this.medioPago = medioPago;
+        this.usuario = usuario;
     }
 
 
@@ -66,7 +70,7 @@ public class Gasto {
         this.fecha = fecha;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(CategoriaEnum categoria) {
         this.categoria = categoria;
     }
 
@@ -74,11 +78,22 @@ public class Gasto {
         this.medioPago = medioPago;
     }
 
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
+
  
 
 
     //GETTERS
 
+    
     public Long getId() {
         return id;
     }
@@ -95,13 +110,19 @@ public class Gasto {
         return fecha;
     }
 
-    public Categoria getCategoria() {
+    public CategoriaEnum getCategoria() {
         return categoria;
     }
 
     public MedioPago getMedioPago() {
         return medioPago;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    
 
   
        
