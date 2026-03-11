@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 // Anotaciones para indicar que esta clase es una entidad y se mapea a una tabla en la base de datos
@@ -22,32 +24,42 @@ public class Comercio {
 
 private Integer id;
 
-@Column(nullable = false, length = 30)
+@Column(name = "nit",nullable = false, unique = false, length = 30)
 private String nit;
 
-@Column(nullable = false, length = 100)
+@Column(name = "nombreComercio",nullable = false, unique = false, length = 50)
 private String nombreComercio;
 
-@Column(nullable = false, length = 100)
+@Column(name = "actividad",nullable = false, unique = false, length = 100)
 private String actividad;
 
-@Column(nullable = false, length = 20)
+@Column(name = "contacto",nullable = false, unique = false, length = 20)
 private String contacto;
 
-@Column(nullable = false, length = 150)
+@Column(name = "direccion",nullable = false, unique = false, length = 25)
 private String direccion;
 
-@Column(nullable = false, length = 100)
+@Column(name = "barrio",nullable = false, unique = false, length = 50)
 private String barrio;
 
-@Column(nullable = false, length = 100)
+@Column(name = "ciudad",nullable = false, unique = false, length = 30)
 private String ciudad;
 
-@Column(nullable = false)
+@Column(name = "fechaCreacion",nullable = false, unique = false)
 private LocalDate fechaCreacion;
 
-@Column(nullable = false, length = 100)
+@Column(name = "HorarioAtencion",nullable = false, unique = false, length = 30)
 private String horarioAtencion;
+
+
+//relacion bd
+
+    @ManyToOne
+    @JoinColumn (name = "fk_Gasto", referencedColumnName = "id")
+    private Gasto gasto;
+
+
+
 
 
 /*Creacion de get and set de cada dato */
@@ -134,3 +146,4 @@ public void setHorarioAtencion(String horarioAtencion) {
 
 
 }
+
