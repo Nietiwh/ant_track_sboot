@@ -1,6 +1,11 @@
 package com.example.ant_track_sboot.modelo;
 
+import java.util.List;
 import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 
 public class Usuario {
 
@@ -14,6 +19,16 @@ public class Usuario {
     private String contacto;
     private float presupMensual;
     private LocalDate fechaRegistro;
+
+
+     @OneToMany (mappedBy = "usuario")
+    private List <Gasto> gastos;
+
+      @OneToMany (mappedBy = "usuario")
+    private List <MetodoPago> MetodosPago;
+
+    
+
 
     
     public Usuario() {
