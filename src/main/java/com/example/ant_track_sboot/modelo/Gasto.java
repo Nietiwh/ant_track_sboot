@@ -9,6 +9,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import java.util.List;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Gasto {
@@ -29,13 +33,18 @@ public class Gasto {
     @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, pero julian ya hizo la clase
     private CategoriaEnum categoria;  // falta relacionarla
 
-    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, se deria de relacionar con Metodo de pago
-    private MedioPago medioPago;
+    @ManyToOne //relacion muchos a uno, muchos gastos pueden ser de un mismo medio de pago
+    @JoinColumn(name = "medio_pago_id", nullable = false) //se debe relacionar con la Clase MedioPago, y se crea una columna medio_pago_id en la tabla gasto
+    private MedioPago medioPago; // Mafe H
 
     @Column(name = "usuario", nullable = false) // se debe relacionar con la Clase Usuario.
     private Usuario usuario;
 
   
+
+
+
+    
     //Constructor vacio
     public Gasto() {
     }
@@ -86,6 +95,12 @@ public class Gasto {
         this.usuario = usuario;
     }
 
+    public void setMetodoPago(MetodoPago metodoPago) {
+        // Mafe H
+    }
+
+
+
     
 
  
@@ -120,6 +135,10 @@ public class Gasto {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+   public MetodoPago getMetodoPago() {
+        return null; //Mafe H
     }
 
     

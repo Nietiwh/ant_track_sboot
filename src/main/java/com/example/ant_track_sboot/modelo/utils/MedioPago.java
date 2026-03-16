@@ -1,4 +1,7 @@
-package com.example.ant_track_sboot.modelo;
+
+import com.example.ant_track_sboot.modelo.utils.MedioPago;
+
+package com.example.ant_track_sboot.modelo.utils;
 
 public enum MedioPago {
 
@@ -11,7 +14,7 @@ public enum MedioPago {
     NEQUI,
 
     DAVIPLATA,
-
+ 
     TRANSFERENCIA
 
 }
