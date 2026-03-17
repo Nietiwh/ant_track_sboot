@@ -27,10 +27,9 @@ public class Usuario {
       @OneToMany (mappedBy = "usuario")
     private List <MetodoPago> MetodosPago;
 
-    
 
 
-    
+
     public Usuario() {
     }
 
@@ -133,6 +132,16 @@ public class Usuario {
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+
+    public List<MetodoPago> getMetodosPago() {
+        return MetodosPago;
+    }
+
+    public void setMetodosPago(List<MetodoPago> metodosPago) {
+        MetodosPago = metodosPago;
+    }
+
+
 
     
 
