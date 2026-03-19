@@ -10,6 +10,5 @@ public enum Franquicia {
     BBVA,
     NEQUI,
     DAVIPLATA,
-    EFECTIVO
-
+    NUBANK
 }  
