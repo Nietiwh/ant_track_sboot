@@ -12,6 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import java.util.List;
+
+import com.example.ant_track_sboot.modelo.utils.CategoriaEnum;
+import com.example.ant_track_sboot.modelo.utils.MedioPago;
+
 import jakarta.persistence.OneToMany;
 
 @Entity
