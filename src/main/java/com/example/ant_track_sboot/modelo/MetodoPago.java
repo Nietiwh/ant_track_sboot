@@ -58,7 +58,18 @@ public class MetodoPago {
     private List<Gasto> gastos;
 
 
+
+    //Constructor vacio
     public MetodoPago() {
+    }
+
+    //Constructor lleno 
+    public MetodoPago(MedioPago formaPago, Franquicia franquicia,Estados estado, String descripcion, Usuario usuario) {
+        this.formaPago = formaPago;
+        this.franquicia = franquicia;
+        this.estado = estado;
+        this.descripcion = descripcion;
+        this.usuario = usuario;
     }
 
 
