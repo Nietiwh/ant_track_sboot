@@ -37,16 +37,12 @@ public class Gasto {
     @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, pero julian ya hizo la clase
     private CategoriaEnum categoria;  // falta relacionarla
 
-    @ManyToOne //relacion muchos a uno, muchos gastos pueden ser de un mismo medio de pago
-    @JoinColumn(name = "medio_pago_id", nullable = false) //se debe relacionar con la Clase MedioPago, y se crea una columna medio_pago_id en la tabla gasto
-    private MedioPago medioPago; // Mafe H
-
     @Column(name = "usuario", nullable = false) // se debe relacionar con la Clase Usuario.
     private Usuario usuario;
 
-  
-
-
+    @ManyToOne
+    @JoinColumn(name = "fk_metodoPago", referencedColumnName = "id")
+    private MetodoPago metodoPago; // se debe relacionar con la Clase MetodoPago.
 
     
     //Constructor vacio
@@ -55,13 +51,13 @@ public class Gasto {
 
     //Constructor full
     public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, CategoriaEnum categoria,
-            MedioPago medioPago, String observaciones, Usuario usuario) {
+            MetodoPago metodoPago, String observaciones, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
         this.valor = valor;
         this.fecha = fecha;
         this.categoria = categoria;
-        this.medioPago = medioPago;
+        this.metodoPago = metodoPago;
         this.usuario = usuario;
     }
 
@@ -87,10 +83,6 @@ public class Gasto {
         this.categoria = categoria;
     }
 
-    public void setMedioPago(MedioPago medioPago) {
-        this.medioPago = medioPago;
-    }
-
     public void setValor(double valor) {
         this.valor = valor;
     }
@@ -100,14 +92,8 @@ public class Gasto {
     }
 
     public void setMetodoPago(MetodoPago metodoPago) {
-        // Mafe H
+        this.metodoPago = metodoPago;  
     }
-
-
-
-    
-
- 
 
 
     //GETTERS
@@ -133,20 +119,12 @@ public class Gasto {
         return categoria;
     }
 
-    public MedioPago getMedioPago() {
-        return medioPago;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
    public MetodoPago getMetodoPago() {
-        return null; //Mafe H
-    }
-
-    
-
-  
+    return metodoPago;
+   }
        
 }
