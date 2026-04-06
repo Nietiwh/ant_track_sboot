@@ -59,9 +59,6 @@ private String horarioAtencion;
     private Gasto gasto;
 
 
-
-
-
 /*Creacion de get and set de cada dato */
 
 public Integer getId() {
