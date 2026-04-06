@@ -4,19 +4,13 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
-import java.util.List;
 
-import com.example.ant_track_sboot.modelo.utils.CategoriaEnum;
-import com.example.ant_track_sboot.modelo.utils.MedioPago;
 
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Gasto {
@@ -34,15 +28,27 @@ public class Gasto {
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
 
+    /* 
     @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, pero julian ya hizo la clase
     private CategoriaEnum categoria;  // falta relacionarla
+*/
 
-    @Column(name = "usuario", nullable = false) // se debe relacionar con la Clase Usuario.
+
+    @ManyToOne  //un usuario tiene muchos gastos
+    @JoinColumn(name = "fk_usuario")
     private Usuario usuario;
 
-    @ManyToOne
+    @ManyToOne // gastos tiene una forma de pago(aunque se prodia decir que es many to many) 
     @JoinColumn(name = "fk_metodoPago", referencedColumnName = "id")
     private MetodoPago metodoPago; // se debe relacionar con la Clase MetodoPago.
+
+    @ManyToOne //a una categoria pertnecen muchos gastos
+    @JoinColumn(name = "fk_categoria")
+    private Categoria categoria;
+
+    @ManyToOne // a un comercio pertenece mucgos gastos (aunque puede pagar en varios comercios)
+    @JoinColumn(name = "fk_comercio")
+    private Comercio comercio;
 
     
     //Constructor vacio
@@ -50,7 +56,7 @@ public class Gasto {
     }
 
     //Constructor full
-    public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, CategoriaEnum categoria,
+    public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, Categoria categoria,
             MetodoPago metodoPago, String observaciones, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
@@ -79,7 +85,7 @@ public class Gasto {
         this.fecha = fecha;
     }
 
-    public void setCategoria(CategoriaEnum categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
@@ -115,7 +121,7 @@ public class Gasto {
         return fecha;
     }
 
-    public CategoriaEnum getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
