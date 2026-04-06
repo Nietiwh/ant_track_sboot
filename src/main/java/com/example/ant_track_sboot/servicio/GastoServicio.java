@@ -5,29 +5,30 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.ant_track_sboot.modelo.Categoria;
-import com.example.ant_track_sboot.repositorio.GastoRepositorio;
+import com.example.ant_track_sboot.modelo.Gasto;
+import com.example.ant_track_sboot.repositorio.IGastoRepositorio;
 
 @Service
 public class GastoServicio {
 
-    private final GastoRepositorio gastoRepositorio;
+    private final IGastoRepositorio gastoRepositorio;
     public GastoServicio gastoServicio;
 
     //implementacion
      //inyeccion CONSTRUCTOR
-    public GastoServicio(GastoRepositorio gastoRepositorio) {
+    public GastoServicio(IGastoRepositorio gastoRepositorio) {
         this.gastoRepositorio = gastoRepositorio;
     }
      // 4. BUSCAR TODOS
    
-    public List<Categoria> buscarTodos() {
-        return categoriaRepositorio.findAll();
+    public List<Gasto> buscarTodos() {
+        return gastoRepositorio.findAll();
     }
 
     // 1. GUARDAR
    
-    public Categoria guardar(Categoria categoria) {
-        return categoriaRepositorio.save(categoria);
+    public Gasto guardar(Gasto gasto) {
+        return gastoRepositorio.save(gasto);
     }
 
     // 2. BUSCAR POR ID

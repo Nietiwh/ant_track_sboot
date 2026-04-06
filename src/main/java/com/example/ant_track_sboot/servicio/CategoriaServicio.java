@@ -1,7 +1,7 @@
 package com.example.ant_track_sboot.servicio;
 
 import com.example.ant_track_sboot.modelo.Categoria;
-import com.example.ant_track_sboot.repositorio.CategoriaRepositorio;
+import com.example.ant_track_sboot.repositorio.ICategoriaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import java.util.List;
 public class CategoriaServicio{
 
     @Autowired //anotación para inyección de dependencias.
-    private CategoriaRepositorio categoriaRepositorio;
+    private ICategoriaRepositorio categoriaRepositorio;
 
     //inyeccion CONSTRUCTOR
-    public CategoriaServicio(CategoriaRepositorio categoriaRepository) {
+    public CategoriaServicio(ICategoriaRepositorio categoriaRepository) {
         this.categoriaRepositorio = categoriaRepository;
     }
 
