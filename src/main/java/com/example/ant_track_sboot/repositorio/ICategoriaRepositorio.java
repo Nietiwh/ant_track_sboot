@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;//Importa la anotación @Reposi
 import com.example.ant_track_sboot.modelo.Categoria;//Importa la entidad Categoria sobre la cual va a operar.
 
 @Repository
-public interface CategoriaRepositorio extends JpaRepository<Categoria, Long> {
+public interface ICategoriaRepositorio extends JpaRepository<Categoria, Long> {
 
   // Spring Data JPA genera automáticamente la implementación 
     //hace el crud: save(), findAll(), findById(), deleteById(), etc.
