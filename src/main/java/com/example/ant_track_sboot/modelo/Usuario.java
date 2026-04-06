@@ -23,8 +23,8 @@ public class Usuario {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "nombres", nullable = false, length = 100)
-    private String nombres;
+    @Column(name = "nombre", nullable = false, length = 100)
+    private String nombre;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento", nullable = false)
@@ -70,12 +70,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public TipoDocumento getTipoDocumento() {

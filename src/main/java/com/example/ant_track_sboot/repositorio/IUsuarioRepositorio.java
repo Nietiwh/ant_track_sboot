@@ -9,6 +9,7 @@ import com.example.ant_track_sboot.modelo.Usuario;
  * Proporciona métodos CRUD automáticos gracias a JpaRepository.
  */
 @Repository
-public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     // No es necesario agregar métodos aquí a menos que necesites consultas personalizadas (Query Methods)
 }
+

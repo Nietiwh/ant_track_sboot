@@ -1,7 +1,7 @@
 package com.example.ant_track_sboot.usuario;
 
 import com.example.ant_track_sboot.modelo.Usuario;
-import com.example.ant_track_sboot.repositorio.UsuarioRepositorio;
+import com.example.ant_track_sboot.repositorio.IUsuarioRepositorio;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +10,11 @@ import java.util.List;
 @Service
 public class UsuarioServicio {
 
-    private final UsuarioRepositorio usuarioRepositorio;
+    private final IUsuarioRepositorio usuarioRepositorio;
 
     // Inyección por constructor (Recomendado)
     // Eliminamos @Autowired del campo de arriba
-    public UsuarioServicio(UsuarioRepositorio usuarioRepositorio) {
+    public UsuarioServicio(IUsuarioRepositorio usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }
 
@@ -44,13 +44,16 @@ public class UsuarioServicio {
 
         // Actualización de campos
         usuarioExistente.setNombre(usuarioActualizado.getNombre());
-        usuarioExistente.setDescripcion(usuarioActualizado.getDescripcion());
-        usuarioExistente.setPresupuestoMaximoMensual(usuarioActualizado.getPresupuestoMaximoMensual());
-        usuarioExistente.setEsNecesaria(usuarioActualizado.isEsNecesaria());
-        usuarioExistente.setPrioridad(usuarioActualizado.getPrioridad());
-        usuarioExistente.setActiva(usuarioActualizado.isActiva());
-        usuarioExistente.setAlertaActiva(usuarioActualizado.isAlertaActiva());
-        usuarioExistente.setGastoMensual(usuarioActualizado.getGastoMensual());
+        usuarioExistente.setTipoDocumento(usuarioActualizado.getTipoDocumento());
+        usuarioExistente.setDocumento(usuarioActualizado.getDocumento());
+        usuarioExistente.setEdad(usuarioActualizado.getEdad());
+        usuarioExistente.setGenero(usuarioActualizado.getGenero());
+        usuarioExistente.setCorreo(usuarioActualizado.getCorreo());
+        usuarioExistente.setContacto(usuarioActualizado.getContacto());
+        usuarioExistente.setPresupMensual(usuarioActualizado.getPresupMensual());
+        usuarioExistente.setFechaRegistro(usuarioActualizado.getFechaRegistro());
+        usuarioExistente.setGastos(usuarioActualizado.getGastos());
+        usuarioExistente.setMetodosPago(usuarioActualizado.getMetodosPago());
 
         return usuarioRepositorio.save(usuarioExistente);
     }
