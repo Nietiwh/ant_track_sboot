@@ -13,3 +13,8 @@ public class AntTrackSbootApplication {
 	}
 
 }
+
+// El servicio es el corazon de la aplicacion y es el encargado de manejar la logica de negocio, 
+// Es el encargado de recibir las peticiones del controlador, procesarlas y devolver una respuesta 
+// al controlador.
+//Es el encargado de la seguridad, la validacion de datos, la gestion de transacciones.
