@@ -20,7 +20,9 @@ import com.example.ant_track_sboot.modelo.utils.Franquicia;
 import com.example.ant_track_sboot.modelo.utils.MedioPago;
 
 // Esta clase la trabaja Mafe H
-// Datos: id, formaPago (efectivo, tarjeta), franquicia (bancolombia), estado (activo/inactivo), descripcion
+// Datos: id, formaPago (efectivo, tarjeta), franquicia (Bancolombia, Davivienda), estado (activo/inactivo)
+// descripcion(se refiere a una breve descripcion del metodo de pago, por ejemplo: 
+// "Tarjeta de credito Visa").
 
 @Entity
 @Table(name = "metodos_pago")
