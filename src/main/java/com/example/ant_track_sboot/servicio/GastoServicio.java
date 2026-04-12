@@ -2,24 +2,24 @@ package com.example.ant_track_sboot.servicio;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.ant_track_sboot.modelo.Categoria;
 import com.example.ant_track_sboot.modelo.Gasto;
 import com.example.ant_track_sboot.repositorio.IGastoRepositorio;
 
 @Service
 public class GastoServicio {
 
-    private final IGastoRepositorio gastoRepositorio;
-    public GastoServicio gastoServicio;
+    @Autowired  //conecta la interface con el servicio
+    private IGastoRepositorio gastoRepositorio;
+  
 
     //implementacion
      //inyeccion CONSTRUCTOR
     public GastoServicio(IGastoRepositorio gastoRepositorio) {
         this.gastoRepositorio = gastoRepositorio;
     }
-     // 4. BUSCAR TODOS
+     // 1. BUSCAR TODOS
    
     public List<Gasto> buscarTodos() {
         return gastoRepositorio.findAll();
@@ -33,41 +33,37 @@ public class GastoServicio {
 
     // 2. BUSCAR POR ID
      //indica que este método viene de la interfaz.
-    public Categoria buscarPorId(Long id) {
-        return categoriaRepositorio.findById(id)
+    public Gasto buscarPorId(Long id) {
+        return gastoRepositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + id));
     }
 
     // 3. BUSCAR POR ATRIBUTO (nombre parcial)
-   /* 
-    public List<Categoria> buscarPorNombre(String nombre) {
-        return categoriaRepositorio.findByNombreContaining(nombre);
-    }*/
+   
+    public List<Gasto> buscarPorNombre(String nombre) {
+        return gastoRepositorio.findByDescripcionContaining(nombre);
+    }
 
   
 
     // 5. EDITAR
    
-    public Categoria editar(Long id, Categoria categoriaActualizada) {
-        Categoria categoriaExistente = buscarPorId(id);
+    public Gasto editar(Long id, Gasto gastoActualizado) {
+        Gasto gastoExistente = buscarPorId(id);
 
-        categoriaExistente.setNombre(categoriaActualizada.getNombre());
-        categoriaExistente.setDescripcion(categoriaActualizada.getDescripcion());
-        categoriaExistente.setPresupuestoMaximoMensual(categoriaActualizada.getPresupuestoMaximoMensual());
-        categoriaExistente.setEsNecesaria(categoriaActualizada.isEsNecesaria());
-        categoriaExistente.setPrioridad(categoriaActualizada.getPrioridad());
-        categoriaExistente.setActiva(categoriaActualizada.isActiva());
-        categoriaExistente.setAlertaActiva(categoriaActualizada.isAlertaActiva());
-        categoriaExistente.setGastoMensual(categoriaActualizada.getGastoMensual());
+        gastoExistente.setDescripcion(gastoActualizado.getDescripcion());
+        gastoExistente.setValor(gastoActualizado.getValor());
+        gastoExistente.setFecha(gastoActualizado.getFecha());
+       
 
-        return categoriaRepositorio.save(categoriaExistente);
+        return gastoRepositorio.save(gastoExistente);
     }
 
     // 6. ELIMINAR
   
     public void eliminar(Long id) {
-        Categoria categoria = buscarPorId(id);
-        categoriaRepositorio.delete(categoria);
+        Gasto gasto = buscarPorId(id);
+        gastoRepositorio.delete(gasto);
     }
 }
 

@@ -10,7 +10,7 @@ import com.example.ant_track_sboot.modelo.Comercio;
 
 
 @Repository
-public interface IComecioRepositorio extends JpaRepository <Comercio, Integer> {
+public interface IComercioRepositorio extends JpaRepository <Comercio, Integer> {
 
     //ya este codigo es capaz de realizar las operaciones basicas de CRUD
     //  (Guardar, Buscar por ID, Buscar todos los registros, Modificar,

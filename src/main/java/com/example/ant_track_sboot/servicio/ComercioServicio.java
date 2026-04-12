@@ -9,7 +9,13 @@ import com.example.ant_track_sboot.repositorio.IComercioRepositorio;
 public class ComercioServicio {
 
     @Autowired
-    private IComercioRepositorio repositorio;
+    private IComercioRepositorio comercioRepositorio;
+
+    public ComercioServicio(IComercioRepositorio comercioRepositorio) {
+        this.comercioRepositorio = comercioRepositorio;
+    }
+
+    
 
     //SERVICIO PARA GUARDAR USUARIO
     //SERVICIO PARA LISTAR TODOS LOS USUARIOS EN BD

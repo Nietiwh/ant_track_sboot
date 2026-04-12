@@ -1,4 +1,4 @@
-package com.example.ant_track_sboot.usuario;
+package com.example.ant_track_sboot.servicio;
 
 import com.example.ant_track_sboot.modelo.Usuario;
 import com.example.ant_track_sboot.repositorio.IUsuarioRepositorio;
