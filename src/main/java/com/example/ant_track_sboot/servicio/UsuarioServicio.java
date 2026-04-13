@@ -2,6 +2,8 @@ package com.example.ant_track_sboot.servicio;
 
 import com.example.ant_track_sboot.modelo.Usuario;
 import com.example.ant_track_sboot.repositorio.IUsuarioRepositorio;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,10 +12,10 @@ import java.util.List;
 @Service
 public class UsuarioServicio {
 
-    private final IUsuarioRepositorio usuarioRepositorio;
+    @Autowired
+    private IUsuarioRepositorio usuarioRepositorio;
 
     // Inyección por constructor (Recomendado)
-    // Eliminamos @Autowired del campo de arriba
     public UsuarioServicio(IUsuarioRepositorio usuarioRepositorio) {
         this.usuarioRepositorio = usuarioRepositorio;
     }

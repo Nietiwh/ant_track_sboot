@@ -1,5 +1,8 @@
 package com.example.ant_track_sboot.repositorio;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.example.ant_track_sboot.modelo.Usuario;
@@ -10,6 +13,21 @@ import com.example.ant_track_sboot.modelo.Usuario;
  */
 @Repository
 public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
-    // No es necesario agregar métodos aquí a menos que necesites consultas personalizadas (Query Methods)
+     // No es necesario agregar métodos aquí a menos que necesites consultas personalizadas (Query Methods)
+
+    //Buscar por nombre exacto (1)
+    List<Usuario> findByNombre(String nombre);
+    //buscar por documento
+    Optional<Usuario>  findByDocumento(String documento);
+    //si me piden un filtro o consulta personalizada si no exite poner un campo en el modelo
+
+    //buscar por nombres que contengan nnn (lista)
+    List<Usuario> findByNombresContaining(List<Usuario>  findByNombre(String nombre););
+
+    //buscar por edad (lista)
+    List<Usuario> findByEdad(Integer edad);
+
+
+   
 }
 
