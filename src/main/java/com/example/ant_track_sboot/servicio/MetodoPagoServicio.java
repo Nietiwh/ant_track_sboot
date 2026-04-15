@@ -4,7 +4,9 @@ package com.example.ant_track_sboot.servicio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ant_track_sboot.modelo.MetodoPago;
 import com.example.ant_track_sboot.modelo.utils.Estados;
@@ -17,28 +19,43 @@ import com.example.ant_track_sboot.repositorio.IMetodoPagoRepositorio;
 public class MetodoPagoServicio {
 
     @Autowired // Inyección de dependencia del repositorio
-    IMetodoPagoRepositorio repositorio;
+    private IMetodoPagoRepositorio repositorio; 
 
     // Aquí puedes agregar métodos para manejar la lógica de negocio relacionada con los métodos de pago
-    //Servicio para guardar un nuevo método de pago
-    //Servicio para actualizar un método de pago existente
-    //Servicio para eliminar un método de pago por su ID
-    //Servicio para buscar un método de pago por su ID
-    //Servicio para listar todos los métodos de pago
+    // Servicio para guardar un nuevo método de pago
+    // Servicio para actualizar un método de pago existente
+    // Servicio para eliminar un método de pago por su ID
+    // Servicio para buscar un método de pago por su ID
+    // Servicio para listar todos los métodos de pago
 
     // 1. GUARDAR un nuevo método de pago
     public MetodoPago guardar(MetodoPago metodoPago) {
-        return repositorio.save(metodoPago);
+        // Aquí puedes agregar validaciones o lógica adicional antes de guardar el método de pago
+        if (metodoPago.getDescripcion() == null || metodoPago.getDescripcion().isEmpty()  
+            || metodoPago.getDescripcion().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "La descripción del método de pago no puede estar vacía");
+        }   // HttpStatus.BAD_REQUEST se utiliza para indicar que la solicitud del cliente es incorrecta 
+            // o no cumple con los requisitos necesarios para ser procesada por el servidor. 
+            // En este caso, se lanza esta excepción cuando la descripción del método de pago es nula,
+            // vacía o solo contiene espacios en blanco, lo que no es válido para un método de pago.
+        
+            // Aquí también podrías agregar validaciones para otros campos, como id, formaPago, 
+            // franquicia, estado.
+         
+            //Despues de las validaciones, se guarda el método de pago utilizando el repositorio y se 
+            // devuelve el objeto guardado.
+        return repositorio.save(metodoPago);   
     }
 
     // 2. BUSCAR POR ID
     public MetodoPago buscarPorId(Long id) {
         return repositorio.findById(id)
-                .orElseThrow(() -> new RuntimeException("Método de pago no encontrado con ID: " + id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Método de pago no encontrado con ID: " + id));
     }
 
     // 3. LISTAR TODOS los métodos de pago
-    public List<MetodoPago> buscarTodos() {
+    public List<MetodoPago> listarTodos() {
         return repositorio.findAll();
     }
 
