@@ -29,8 +29,10 @@ Optional<Comercio> findByNit(String nit);
 //buscar por nombres que contengan nnn(lista)
 List<Comercio> findByNombreComercioContaining(String nombreComercio);
 
+/* 
+esta malo no existe
 //buscar por edad(lista)
 List<Comercio> findByEdad(int edad);
-
+*/
 
 }

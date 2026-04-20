@@ -16,9 +16,7 @@ public class ComercioServicio {
     @Autowired
     private IComercioRepositorio comercioRepositorio;
 
-    public ComercioServicio(IComercioRepositorio comercioRepositorio) {
-        this.comercioRepositorio = comercioRepositorio;
-    }
+  
 
     // SERVICIO PARA GUARDAR USUARIO (Nombre Comercio)
     public Comercio guardar_Comercio(Comercio nombreComercio) {
