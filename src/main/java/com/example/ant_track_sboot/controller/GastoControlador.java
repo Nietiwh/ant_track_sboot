@@ -1,0 +1,59 @@
+package com.example.ant_track_sboot.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.ant_track_sboot.modelo.Gasto;
+import com.example.ant_track_sboot.servicio.GastoServicio;
+
+
+
+@RestController
+@RequestMapping("/anttrackapi/v1/gastos")
+public class GastoControlador {
+
+    //inyectar el servivicio 
+
+    @Autowired
+    private GastoServicio gastoServicio;
+
+    //para cada servicio se debe programar una funcion
+    //esa funcion recibe peticiones y responde
+
+    @PostMapping
+    public ResponseEntity<?> saveGasto(@RequestBody Gasto datos){
+        return ResponseEntity.status(HttpStatus.OK).body(
+            gastoServicio.guardarGasto(datos)
+        );
+    }
+
+    @GetMapping
+    public ResponseEntity<?> findGastos(){
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+            gastoServicio.buscarTodos()
+        );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findGastoById(@PathVariable Long id){
+    return ResponseEntity.status(HttpStatus.OK).body(
+        gastoServicio.buscarPorId(id)
+    );
+   }
+
+
+    
+
+
+
+    
+}

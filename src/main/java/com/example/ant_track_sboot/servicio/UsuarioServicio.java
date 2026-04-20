@@ -41,7 +41,7 @@ public class UsuarioServicio {
         return usuarioRepositorio.save(datosUsario);
     }
 
-    // LISTAR TODO
+    // LISTAR 
     public List<Usuario> buscarTodos() {
         // Simplemente pedimos todo  datos al repositorio
         return usuarioRepositorio.findAll();
