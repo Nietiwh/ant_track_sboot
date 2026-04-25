@@ -1,0 +1,44 @@
+package com.example.ant_track_sboot.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.ant_track_sboot.modelo.Categoria;
+import com.example.ant_track_sboot.modelo.Comercio;
+import com.example.ant_track_sboot.modelo.MetodoPago;
+import com.example.ant_track_sboot.servicio.CategoriaServicio;
+import com.example.ant_track_sboot.servicio.ComercioServicio;
+
+@RestController
+@RequestMapping("/anttrackapi/v1/categoria")
+public class CategoriaControlador {
+
+    @Autowired
+    private CategoriaServicio categoriaServicio;
+
+    // Guardo para crear categorias
+    @PostMapping
+    public ResponseEntity<?> controladorGuardarCategoria(@RequestBody Categoria datos) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaServicio.guardar(datos));
+    }
+
+    // 2. LISTAR TODOS:  Me devuelve la lista completa 
+    @GetMapping
+    public ResponseEntity<?> controladorListarTodosCategoria() {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.buscarTodos());
+    }
+
+    // 3. BUSCAR POR ID: el detalle de una específica
+    @GetMapping("/{id}")
+    public ResponseEntity<?> controladorBuscarPorId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.buscarPorId(id));
+    }
+
+}
