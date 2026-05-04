@@ -1,6 +1,9 @@
 package com.example.ant_track_sboot.servicio;
 
 import java.util.List;
+import java.util.Optional;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,14 +12,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ant_track_sboot.modelo.Comercio;
 import com.example.ant_track_sboot.repositorio.IComercioRepositorio;
+import com.example.ant_track_sboot.repositorio.IUsuarioRepositorio;
 
 @Service
 public class ComercioServicio {
 
     @Autowired
     private IComercioRepositorio comercioRepositorio;
-
-  
 
     // SERVICIO PARA GUARDAR USUARIO (Nombre Comercio)
     public Comercio guardar_Comercio(Comercio nombreComercio) {
@@ -27,12 +29,21 @@ public class ComercioServicio {
             // usar la clase ResponseStatusException para lanzar una excepción con un
             // mensaje personalizado y un código de estado HTTP adecuado (por ejemplo, 400
             // Bad Request).
+
+            // En este caso, si el nombre del comercio es nulo, está en blanco o está vacío,
+            // se lanzará una excepción con un mensaje de error indicando que el nombre del
+            // comercio no puede estar vacío o nulo, y se solicitará al usuario que ingrese
+            // un nombre válido.
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "El nombre del comercio no puede estar vacío o nulo, por favor ingrese un nombre válido.    ");
 
         }
-
+        // Validación para el campo NIT, se verifica que no sea nulo, vacío o en blanco,
+        // y que tenga al menos 9 caracteres, si alguna de estas condiciones no se
+        // cumple se lanza una excepción con un mensaje de error indicando que el
+        // documento no puede estar vacío o nulo, y se solicita al usuario que ingrese
+        // un documento válido.
         if (nombreComercio.getNit().length() < 9) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -53,7 +64,61 @@ public class ComercioServicio {
     }
 
     // SERVICIO PARA ELIMINAR UN USUARIO EN BD
+    public boolean eliminar_comercio(Integer id) {
+        Optional<Comercio> comercioExistente =  comercioRepositorio.findById(id);
+
+        // is present es que existe y is empty es que no existe, si el comercio existe
+        // se elimina y se retorna true, si no existe se retorna false
+        if (comercioExistente.isPresent()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El comercio no existe en la base de datos.");
+
+        } else {
+            comercioRepositorio.deleteById(id);
+            return true;
+
+        }
+    }
+
     // SERVICIO PARA MODIFICAR UN USUARIO EN BD
+
+    public Comercio modificar_comercio(Integer id , Comercio datos) {
+        Optional<Comercio> comercioExistente = comercioRepositorio.findById(id);
+
+        //is present es que existe y is empty es que no existe, si el comercio existe se modifica y se retorna true, si no existe se retorna false
+        if(comercioExistente.isEmpty()){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El comercio no existe en la base de datos.");
+
+        }
+        else{
+            //lo edito
+           Comercio comercioEncontrado = comercioExistente.get();
+           //Defino que campos se pueden modificar, en este caso solo el nombre del comercio, si se quieren modificar mas campos se deben agregar aqui
+           comercioEncontrado.setNombreComercio(datos.getNombreComercio()); 
+            return comercioRepositorio.save(comercioEncontrado);   
+        }
+
+    }
+
     // SERVICIO PARA BUSCAR UN USUARIO POR ID EN BD
+
+    public Comercio buscar_comercio_id(Integer id){
+        Optional<Comercio> comercioExistente = comercioRepositorio.findById(id);
+
+        //is present es que existe y is empty es que no existe, si el comercio existe se retorna el comercio, si no existe se retorna un mensaje de error indicando que el comercio no existe en la base de datos
+        if(comercioExistente.isEmpty()){
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "El comercio no existe en la base de datos.");
+
+        }else{
+            return (comercioExistente.get());
+            
+        }
+
+    }
 
 }

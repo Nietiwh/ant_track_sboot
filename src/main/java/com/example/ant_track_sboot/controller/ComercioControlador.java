@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ant_track_sboot.modelo.Comercio;
 import com.example.ant_track_sboot.servicio.ComercioServicio;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/AntTrack/v1/comercios")
@@ -54,6 +58,34 @@ public class ComercioControlador {
         .body(comercioServicio.listar_comercios());
         }
 
+
+        //Funcion controladora del servicio para modificar un comercio, esta funcion recibira una peticion PUT con los datos del comercio a modificar, validara los datos y llamara al servicio para modificar el comercio en la base de datos, si todo sale bien se retornara el comercio modificado, si no se retornara un mensaje de error con el motivo del error
+        
+        @PutMapping("/{id}")
+        public ResponseEntity<?> controladorModificar(@PathVariable Integer id, @RequestBody Comercio datos) {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                comercioServicio.modificar_comercio(id, datos)
+            );
+            
+        }
+
+        //Funcion controladora del servicio para eliminar un comercio, esta funcion recibira una peticion DELETE con el id del comercio a eliminar, validara el id y llamara al servicio para eliminar el comercio en la base de datos, si todo sale bien se retornara un mensaje indicando que el comercio fue eliminado, si no se retornara un mensaje de error con el motivo del error
+        
+        @DeleteMapping("/{id}")
+        public ResponseEntity<?> controladorEliminar(@PathVariable Integer id) {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                comercioServicio.eliminar_comercio(id)
+            );
+        }
+
+        //Funcion controladora del servicio para buscar un comercio por id, esta funcion recibira una peticion GET con el id del comercio a buscar, validara el id y llamara al servicio para buscar el comercio en la base de datos, si se encuentra el comercio se retornara el comercio encontrado, si no se encuentra el comercio se retornara un mensaje de error indicando que no se encontro el comercio
+
+        @GetMapping("/{id}")
+        public ResponseEntity<?> controladorBuscar(@PathVariable Integer id) {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                comercioServicio.buscar_comercio_id(id)
+            );
+        }
 }
 
 
