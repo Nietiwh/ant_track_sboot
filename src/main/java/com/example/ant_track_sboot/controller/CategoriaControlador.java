@@ -3,6 +3,7 @@ package com.example.ant_track_sboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ant_track_sboot.modelo.Categoria;
-import com.example.ant_track_sboot.modelo.Comercio;
-import com.example.ant_track_sboot.modelo.MetodoPago;
 import com.example.ant_track_sboot.servicio.CategoriaServicio;
-import com.example.ant_track_sboot.servicio.ComercioServicio;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 @RestController
 @RequestMapping("/anttrackapi/v1/categoria")
@@ -41,4 +42,13 @@ public class CategoriaControlador {
         return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.buscarPorId(id));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?>controladorModificarCategoria(@PathVariable Long id, @RequestBody Categoria datos) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.editar(id, datos));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?>controladorEliminarCategoria(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.eliminar(id));
+    }
 }
