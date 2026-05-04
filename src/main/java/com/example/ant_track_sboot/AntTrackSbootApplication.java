@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AntTrackSbootApplication {
 
-	//modificanod adrico para subirlo
+	//modificando adrico para subirlo
 
 	public static void main(String[] args) {
 		SpringApplication.run(AntTrackSbootApplication.class, args);
