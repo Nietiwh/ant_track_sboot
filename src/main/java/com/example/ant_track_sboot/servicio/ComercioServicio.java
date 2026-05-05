@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ant_track_sboot.modelo.Comercio;
 import com.example.ant_track_sboot.repositorio.IComercioRepositorio;
-import com.example.ant_track_sboot.repositorio.IUsuarioRepositorio;
+
 
 @Service
 public class ComercioServicio {
