@@ -28,14 +28,8 @@ public class Gasto {
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
 
-    /* 
-    @Enumerated(EnumType.STRING) //viene de un ENUM datos fijos donde puede elegir, pero julian ya hizo la clase
-    private CategoriaEnum categoria;  // falta relacionarla
-*/
-
-
     @ManyToOne  //un usuario tiene muchos gastos
-    @JoinColumn(name = "fk_usuario")
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id")
     private Usuario usuario;
 
     @ManyToOne // gastos tiene una forma de pago(aunque se prodia decir que es many to many) 
@@ -43,11 +37,11 @@ public class Gasto {
     private MetodoPago metodoPago; // se debe relacionar con la Clase MetodoPago.
 
     @ManyToOne //a una categoria pertnecen muchos gastos
-    @JoinColumn(name = "fk_categoria")
+    @JoinColumn(name = "fk_categoria", referencedColumnName = "id")
     private Categoria categoria;
 
     @ManyToOne // a un comercio pertenece mucgos gastos (aunque puede pagar en varios comercios)
-    @JoinColumn(name = "fk_comercio")
+    @JoinColumn(name = "fk_comercio", referencedColumnName = "id")
     private Comercio comercio;
 
     
@@ -55,82 +49,100 @@ public class Gasto {
     public Gasto() {
     }
 
-    //Constructor full
-    public Gasto(Long id, String descripcion, Double valor, LocalDateTime fecha, Categoria categoria,
-            MetodoPago metodoPago, String observaciones, Usuario usuario) {
-        this.id = id;
+
+    public Gasto(String descripcion, double valor, Usuario usuario, MetodoPago metodoPago, Categoria categoria,
+            Comercio comercio) {
         this.descripcion = descripcion;
         this.valor = valor;
-        this.fecha = fecha;
-        this.categoria = categoria;
-        this.metodoPago = metodoPago;
         this.usuario = usuario;
+        this.metodoPago = metodoPago;
+        this.categoria = categoria;
+        this.comercio = comercio;
     }
 
 
-    //SETTERS
+    //GETTER AND SETTER
+    public Long getId() {
+        return id;
+    }
+
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;  
-    }
-
-
-    //GETTERS
-
-    
-    public Long getId() {
-        return id;
-    }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public Double getValor() {
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+
+    public double getValor() {
         return valor;
     }
+
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
 
     public LocalDateTime getFecha() {
         return fecha;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
     }
+
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-   public MetodoPago getMetodoPago() {
-    return metodoPago;
-   }
-       
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+
+    public MetodoPago getMetodoPago() {
+        return metodoPago;
+    }
+
+
+    public void setMetodoPago(MetodoPago metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+
+    public Comercio getComercio() {
+        return comercio;
+    }
+
+
+    public void setComercio(Comercio comercio) {
+        this.comercio = comercio;
+    }
+
+    
+
+    
+
 }
