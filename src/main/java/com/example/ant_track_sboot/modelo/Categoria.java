@@ -2,6 +2,10 @@ package com.example.ant_track_sboot.modelo;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import com.example.ant_track_sboot.modelo.utils.Estado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -24,41 +28,33 @@ public class Categoria {
     @Column(nullable = false)
     private double gastoMensual;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean esNecesaria;
-
-    @Column(nullable = false)
-    private boolean alertaActiva;
-
-    @Column(nullable = false)
-    private int prioridad;
-
-    @Column(nullable = false)
-    private boolean activa;
+    private Estado estado;
 
     @Column(nullable = false)
     private LocalDateTime fechaCreacion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Gasto> gastos;
 
 
+    //CONSTRUCTOR VACIO
     public Categoria() {
     }
 
-    public Categoria(String nombre, String descripcion, double presupuestoMaximoMensual,
-            boolean esNecesaria, Integer prioridad) {
+    //CONSTRUCTOR FULL
+    public Categoria(String nombre, String descripcion, double presupuestoMaximoMensual, double gastoMensual
+            ) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.presupuestoMaximoMensual = presupuestoMaximoMensual;
-        this.esNecesaria = esNecesaria;
-        this.prioridad = 1;
-        this.gastoMensual = 0;
-        this.alertaActiva = false;
-        this.activa = true;
-        this.fechaCreacion = LocalDateTime.now();
-    }
+        this.gastoMensual = gastoMensual;
 
+        //ESTADO Y FECHA LO MANDAMOS POR DEFECTO DESDE EL CREATE
+        
+    }
 
     public Long getId() {
         return id;
@@ -96,38 +92,6 @@ public class Categoria {
         this.gastoMensual = gastoMensual;
     }
 
-    public boolean isEsNecesaria() {
-        return esNecesaria;
-    }
-
-    public void setEsNecesaria(boolean esNecesaria) {
-        this.esNecesaria = esNecesaria;
-    }
-
-    public boolean isAlertaActiva() {
-        return alertaActiva;
-    }
-
-    public void setAlertaActiva(boolean alertaActiva) {
-        this.alertaActiva = alertaActiva;
-    }
-
-    public int getPrioridad() {
-        return prioridad;
-    }
-
-    public void setPrioridad(int prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    public boolean isActiva() {
-        return activa;
-    }
-
-    public void setActiva(boolean activa) {
-        this.activa = activa;
-    }
-
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
@@ -139,4 +103,21 @@ public class Categoria {
     public void setGastos(List<Gasto> gastos) {
         this.gastos = gastos;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    
 }

@@ -5,10 +5,5 @@ public enum Franquicia {
     VISA,
     MASTERCARD,
     AMERICAN_EXPRESS,
-    BANCOLOMBIA,
-    DAVIVIENDA,
-    BBVA,
-    NEQUI,
-    DAVIPLATA,
-    NUBANK
+    OTRA
 }  

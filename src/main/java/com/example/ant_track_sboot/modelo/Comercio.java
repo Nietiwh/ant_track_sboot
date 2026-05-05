@@ -1,14 +1,19 @@
 package com.example.ant_track_sboot.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.example.ant_track_sboot.modelo.utils.Estado;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 // Anotaciones para indicar que esta clase es una entidad y se mapea a una tabla en la base de datos
@@ -21,8 +26,7 @@ public class Comercio {
 
 @Id //anotacion id  para indicar que es la clave primaria
 @GeneratedValue(strategy = GenerationType.IDENTITY) // anotacion para indicar que el valor se genera automaticamente por la base de datos
-
-private Integer id;
+private Long id;
 
 @Column(name = "nit",nullable = false, unique = false, length = 30)
 private String nit;
@@ -30,44 +34,42 @@ private String nit;
 @Column(name = "nombreComercio",nullable = false, unique = false, length = 50)
 private String nombreComercio;
 
-@Column(name = "actividad",nullable = false, unique = false, length = 100)
-private String actividad;
-
 @Column(name = "contacto",nullable = false, unique = false, length = 20)
-private String contacto;
+private String telefono;
 
 @Column(name = "direccion",nullable = false, unique = false, length = 25)
 private String direccion;
 
-@Column(name = "barrio",nullable = false, unique = false, length = 50)
-private String barrio;
-
-@Column(name = "ciudad",nullable = false, unique = false, length = 30)
-private String ciudad;
+@Column(name = "HorarioAtencion",nullable = false, unique = false, length = 30)
+private String horarioAtencion;
 
 @Column(name = "fechaCreacion",nullable = false, unique = false)
 private LocalDate fechaCreacion;
 
-@Column(name = "HorarioAtencion",nullable = false, unique = false, length = 30)
-private String horarioAtencion;
+@Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Estado estado;
 
 
 //relacion bd
 
-    @ManyToOne
-    @JoinColumn (name = "fk_Gasto", referencedColumnName = "id")
-    private Gasto gasto;
+ @JsonIgnore
+@OneToMany(mappedBy = "comercio")
+private List<Gasto> gastos;
 
+//CONSTRUCTORES
+public Comercio() {
+}
+
+public Comercio(String nit, String nombreComercio, String telefono, String direccion, String horarioAtencion) {
+    this.nit = nit;
+    this.nombreComercio = nombreComercio;
+    this.telefono = telefono;
+    this.direccion = direccion;
+    this.horarioAtencion = horarioAtencion;
+}
 
 /*Creacion de get and set de cada dato */
-
-public Integer getId() {
-    return id;
-}
-
-public void setId(Integer id) {
-    this.id = id;
-}
 
 public String getNit() {
     return nit;
@@ -85,44 +87,12 @@ public void setNombreComercio(String nombreComercio) {
     this.nombreComercio = nombreComercio;
 }
 
-public String getActividad() {
-    return actividad;
-}
-
-public void setActividad(String actividad) {
-    this.actividad = actividad;
-}
-
-public String getContacto() {
-    return contacto;
-}
-
-public void setContacto(String contacto) {
-    this.contacto = contacto;
-}
-
 public String getDireccion() {
     return direccion;
 }
 
 public void setDireccion(String direccion) {
     this.direccion = direccion;
-}
-
-public String getBarrio() {
-    return barrio;
-}
-
-public void setBarrio(String barrio) {
-    this.barrio = barrio;
-}
-
-public String getCiudad() {
-    return ciudad;
-}
-
-public void setCiudad(String ciudad) {
-    this.ciudad = ciudad;
 }
 
 public LocalDate getFechaCreacion() {
@@ -139,6 +109,38 @@ public String getHorarioAtencion() {
 
 public void setHorarioAtencion(String horarioAtencion) {
     this.horarioAtencion = horarioAtencion;
+}
+
+public Long getId() {
+    return id;
+}
+
+public void setId(Long id) {
+    this.id = id;
+}
+
+public String getTelefono() {
+    return telefono;
+}
+
+public void setTelefono(String telefono) {
+    this.telefono = telefono;
+}
+
+public Estado getEstado() {
+    return estado;
+}
+
+public void setEstado(Estado estado) {
+    this.estado = estado;
+}
+
+public List<Gasto> getGastos() {
+    return gastos;
+}
+
+public void setGastos(List<Gasto> gastos) {
+    this.gastos = gastos;
 }
 
 

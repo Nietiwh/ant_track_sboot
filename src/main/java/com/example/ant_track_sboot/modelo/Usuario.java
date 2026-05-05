@@ -2,7 +2,7 @@ package com.example.ant_track_sboot.modelo;
 
 import java.util.List;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import com.example.ant_track_sboot.modelo.utils.TipoDocumento;
@@ -14,7 +14,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nombre;
@@ -29,20 +29,21 @@ public class Usuario {
     @Column(nullable = false)
     private Integer edad;
 
+    @Column(nullable = false)
     private String genero;
 
     @Column(nullable = false, unique = true)
     private String correo;
 
-    private String contacto;
+    @Column(nullable = false)
+    private String telefono;
 
     @Column(nullable = false)
     private BigDecimal presupMensual;
 
     @Column(nullable = false)
-    private LocalDate fechaRegistro;
+    private LocalDateTime fechaRegistro;
 
-    // 🔐 PASSWORD
     @Column(nullable = true)
     private String password;
 
@@ -50,42 +51,124 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Gasto> gastos;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
-    private List<MetodoPago> metodosPago;
+    //constructor
+    public Usuario() {
+    }
 
-    // GETTERS Y SETTERS
+    public Usuario(String nombre, TipoDocumento tipoDocumento, String documento, Integer edad, String genero,
+            String correo, String telefono, BigDecimal presupMensual, String password) {
+        this.nombre = nombre;
+        this.tipoDocumento = tipoDocumento;
+        this.documento = documento;
+        this.edad = edad;
+        this.genero = genero;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.presupMensual = presupMensual;
+        this.password = password;
+    }
 
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public TipoDocumento getTipoDocumento() { return tipoDocumento; }
-    public void setTipoDocumento(TipoDocumento tipoDocumento) { this.tipoDocumento = tipoDocumento; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getDocumento() { return documento; }
-    public void setDocumento(String documento) { this.documento = documento; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public Integer getEdad() { return edad; }
-    public void setEdad(Integer edad) { this.edad = edad; }
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
 
-    public String getGenero() { return genero; }
-    public void setGenero(String genero) { this.genero = genero; }
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
 
-    public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+    public String getDocumento() {
+        return documento;
+    }
 
-    public String getContacto() { return contacto; }
-    public void setContacto(String contacto) { this.contacto = contacto; }
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
 
-    public BigDecimal getPresupMensual() { return presupMensual; }
-    public void setPresupMensual(BigDecimal presupMensual) { this.presupMensual = presupMensual; }
+    public Integer getEdad() {
+        return edad;
+    }
 
-    public LocalDate getFechaRegistro() { return fechaRegistro; }
-    public void setFechaRegistro(LocalDate fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public BigDecimal getPresupMensual() {
+        return presupMensual;
+    }
+
+    public void setPresupMensual(BigDecimal presupMensual) {
+        this.presupMensual = presupMensual;
+    }
+
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<Gasto> getGastos() {
+        return gastos;
+    }
+
+    public void setGastos(List<Gasto> gastos) {
+        this.gastos = gastos;
+    }
+
+ 
+
+    
+
+    
+
+   
 }

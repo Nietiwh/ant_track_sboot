@@ -53,10 +53,6 @@ public class CategoriaServicio{
         categoriaExistente.setNombre(categoriaActualizada.getNombre());
         categoriaExistente.setDescripcion(categoriaActualizada.getDescripcion());
         categoriaExistente.setPresupuestoMaximoMensual(categoriaActualizada.getPresupuestoMaximoMensual());
-        categoriaExistente.setEsNecesaria(categoriaActualizada.isEsNecesaria());
-        categoriaExistente.setPrioridad(categoriaActualizada.getPrioridad());
-        categoriaExistente.setActiva(categoriaActualizada.isActiva());
-        categoriaExistente.setAlertaActiva(categoriaActualizada.isAlertaActiva());
         categoriaExistente.setGastoMensual(categoriaActualizada.getGastoMensual());
 
         return categoriaRepositorio.save(categoriaExistente);

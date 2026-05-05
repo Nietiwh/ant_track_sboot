@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.ant_track_sboot.modelo.MetodoPago;
-import com.example.ant_track_sboot.modelo.utils.Estados;
+import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.example.ant_track_sboot.modelo.utils.Franquicia;
 import com.example.ant_track_sboot.modelo.utils.MedioPago;
 import com.example.ant_track_sboot.repositorio.IMetodoPagoRepositorio;
@@ -90,7 +90,6 @@ public class MetodoPagoServicio {
             metodoPagoExistente.setFranquicia(metodoPagoActualizado.getFranquicia());
             metodoPagoExistente.setEstado(metodoPagoActualizado.getEstado());
             metodoPagoExistente.setDescripcion(metodoPagoActualizado.getDescripcion());
-            metodoPagoExistente.setUsuario(metodoPagoActualizado.getUsuario());
             return repositorio.save(metodoPagoExistente);
         }
     }
@@ -117,7 +116,7 @@ public class MetodoPagoServicio {
     }
 
     // 8. BUSCAR POR ESTADO (ACTIVO / INACTIVO)
-    public List<MetodoPago> buscarPorEstado(Estados estado) {
+    public List<MetodoPago> buscarPorEstado(Estado estado) {
         return repositorio.findByEstado(estado.name());
     }
 
