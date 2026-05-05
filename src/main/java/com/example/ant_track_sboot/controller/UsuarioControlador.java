@@ -33,7 +33,7 @@ public class UsuarioControlador {
 
     // BUSCAR POR ID
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> controladorBuscarPorId(@PathVariable Integer id){
+    public ResponseEntity<Usuario> controladorBuscarPorId(@PathVariable Long id){
         return ResponseEntity.ok(
             usuarioServicio.buscarPorId(id)
         );
@@ -42,7 +42,7 @@ public class UsuarioControlador {
     // EDITAR USUARIO
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> controladorEditar(
-            @PathVariable Integer id,
+            @PathVariable Long id,
             @RequestBody Usuario datos){
 
         return ResponseEntity.ok(
@@ -52,19 +52,10 @@ public class UsuarioControlador {
 
     // ELIMINAR USUARIO
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> controladorEliminar(@PathVariable Integer id){
+    public ResponseEntity<?> controladorEliminar(@PathVariable Long id){
         return ResponseEntity.ok(
             usuarioServicio.eliminar_usuario(id)
         );
     }
 
-    // LOGIN (extra que te dejé en el servicio)
-    @PostMapping("/login")
-    public ResponseEntity<Usuario> login(
-            @RequestBody Usuario datos){
-
-        return ResponseEntity.ok(
-            usuarioServicio.login(datos.getCorreo(), datos.getPassword())
-        );
-    }
 }

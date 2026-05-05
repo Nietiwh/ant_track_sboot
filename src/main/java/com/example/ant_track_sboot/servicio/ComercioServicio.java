@@ -3,14 +3,12 @@ package com.example.ant_track_sboot.servicio;
 import java.util.List;
 import java.util.Optional;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.example.ant_track_sboot.modelo.Comercio;
+import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.example.ant_track_sboot.repositorio.IComercioRepositorio;
 
 
@@ -64,12 +62,12 @@ public class ComercioServicio {
     }
 
     // SERVICIO PARA ELIMINAR UN USUARIO EN BD
-    public boolean eliminar_comercio(Integer id) {
+    public boolean eliminar_comercio(Long id) {
         Optional<Comercio> comercioExistente =  comercioRepositorio.findById(id);
 
         // is present es que existe y is empty es que no existe, si el comercio existe
         // se elimina y se retorna true, si no existe se retorna false
-        if (comercioExistente.isPresent()) {
+        if (!comercioExistente.isPresent()) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "El comercio no existe en la base de datos.");
@@ -83,7 +81,7 @@ public class ComercioServicio {
 
     // SERVICIO PARA MODIFICAR UN USUARIO EN BD
 
-    public Comercio modificar_comercio(Integer id , Comercio datos) {
+    public Comercio modificar_comercio(Long id , Comercio datos) {
         Optional<Comercio> comercioExistente = comercioRepositorio.findById(id);
 
         //is present es que existe y is empty es que no existe, si el comercio existe se modifica y se retorna true, si no existe se retorna false
@@ -93,19 +91,25 @@ public class ComercioServicio {
                     "El comercio no existe en la base de datos.");
 
         }
-        else{
+       
             //lo edito
            Comercio comercioEncontrado = comercioExistente.get();
            //Defino que campos se pueden modificar, en este caso solo el nombre del comercio, si se quieren modificar mas campos se deben agregar aqui
            comercioEncontrado.setNombreComercio(datos.getNombreComercio()); 
-            return comercioRepositorio.save(comercioEncontrado);   
-        }
+           comercioEncontrado.setNit(datos.getNit());
+           comercioEncontrado.setTelefono(datos.getTelefono());
+           comercioEncontrado.setDireccion(datos.getDireccion());
+           comercioEncontrado.setHorarioAtencion(datos.getHorarioAtencion());
+         
+           
+        return comercioRepositorio.save(comercioEncontrado);   
+        
 
     }
 
-    // SERVICIO PARA BUSCAR UN USUARIO POR ID EN BD
+    // SERVICIO PARA BUSCAR UN comercio POR ID EN BD
 
-    public Comercio buscar_comercio_id(Integer id){
+    public Comercio buscar_comercio_id(Long id){
         Optional<Comercio> comercioExistente = comercioRepositorio.findById(id);
 
         //is present es que existe y is empty es que no existe, si el comercio existe se retorna el comercio, si no existe se retorna un mensaje de error indicando que el comercio no existe en la base de datos
@@ -116,9 +120,33 @@ public class ComercioServicio {
 
         }else{
             return (comercioExistente.get());
-            
+        
         }
+   }
 
-    }
+    // activar 
+      
+    public boolean activaComercio(Long id) {
+        Optional<Comercio> comercioBuscar = comercioRepositorio.findById(id);
+        if(!comercioBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+           Comercio comercioActivar = comercioBuscar.get();
+           comercioActivar.setEstado(Estado.ACTIVO);
+           comercioRepositorio.save(comercioActivar);
+           return true;
+       }
+       // desactivasr
+      
+    public boolean desactivaComercio(Long id) {
+        Optional<Comercio> comercioBuscar = comercioRepositorio.findById(id);
+        if(!comercioBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+           Comercio comercioDesaActivar = comercioBuscar.get();
+           comercioDesaActivar.setEstado(Estado.INACTIVO);
+           comercioRepositorio.save(comercioDesaActivar);
+           return true;
+       }
 
 }

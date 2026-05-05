@@ -14,9 +14,8 @@ con alertas y control de presupuesto mensual.
 - **MetodoPago** → forma de pago utilizada
 
 ## Relaciones
-- Un Usuario tiene muchas Categorias
-- Un Usuario tiene muchos Gastos
-- Un Gasto pertenece a una Categoria, un Comercio y un MetodoPago
+
+- Un Gasto pertenece a un ususario, una Categoria, un Comercio y un MetodoPago
 
 ## Tecnologías
 - Java 17
@@ -29,3 +28,58 @@ con alertas y control de presupuesto mensual.
 - Rama de desarrollo: `develop`
 - Ramas por integrante: `feat-nombre`
 
+## JSON EJEMPLOS POSTMAN
+
+METODOS PAGO
+
+{
+  "formaPago": "EFECTIVO",
+  "franquicia": "OTRA",
+  "descripcion": "Pago mediante efectivo"
+}
+
+CATEGORIA
+
+{
+  "nombre": "Arriendo",
+  "descripcion": "Todo tipo de arriendos",
+  "presupuestoMaximoMensual": 3000000,
+  "gastoMensual": 0
+ }
+
+ COMERCIO
+
+ {
+  "nit": "20222828281",
+  "nombreComercio": "confama",
+  "telefono": "30011133310",
+  "direccion": "Calle 20 40, medellin",
+  "horarioAtencion": "8am-5pm"
+}
+
+GASTOS
+
+{
+  "descripcion": "Arriendo",
+  "valor": 1000000,
+  "categoriaId": 2,
+  "usuarioId": 2,
+  "metodoPagoId": 1,
+  "comercioId": 5
+}
+
+USAURIOS
+
+
+
+{
+   "nombre": "Julián Esteban Rojas PASS 1111",
+    "tipoDocumento": "PASAPORTE",
+    "documento": "CE456789012",
+    "edad": 35,
+    "genero": "Masculino",
+    "correo": "julian.rojas@email.com",
+    "telefono": "3159876543",
+    "presupMensual": 4500000,
+    "password": "1111"
+}

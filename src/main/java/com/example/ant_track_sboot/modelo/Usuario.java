@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
+
+import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.example.ant_track_sboot.modelo.utils.TipoDocumento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -47,6 +49,10 @@ public class Usuario {
     @Column(nullable = true)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", nullable = false)
+    private Estado estado;
+
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Gasto> gastos;
@@ -55,8 +61,12 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, TipoDocumento tipoDocumento, String documento, Integer edad, String genero,
-            String correo, String telefono, BigDecimal presupMensual, String password) {
+    
+
+    public Usuario(String nombre, TipoDocumento tipoDocumento, String documento, 
+                    Integer edad, String genero,String correo,
+                     String telefono, BigDecimal presupMensual, String password
+                 ) {
         this.nombre = nombre;
         this.tipoDocumento = tipoDocumento;
         this.documento = documento;
@@ -66,7 +76,11 @@ public class Usuario {
         this.telefono = telefono;
         this.presupMensual = presupMensual;
         this.password = password;
+        this.estado = Estado.ACTIVO;
+        this.fechaRegistro = LocalDateTime.now();
     }
+
+
 
     public Long getId() {
         return id;
@@ -160,9 +174,15 @@ public class Usuario {
         return gastos;
     }
 
-    public void setGastos(List<Gasto> gastos) {
-        this.gastos = gastos;
+    public Estado getEstado() {
+        return estado;
     }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+   
 
  
 

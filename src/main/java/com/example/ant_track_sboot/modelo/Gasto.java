@@ -23,7 +23,7 @@ public class Gasto {
     private String descripcion;
 
     @Column(name = "valor", nullable = false) //Columna obligatoria
-    private double valor;
+    private Double valor;
     
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
@@ -48,18 +48,17 @@ public class Gasto {
     //Constructor vacio
     public Gasto() {
     }
-
-
-    public Gasto(String descripcion, double valor, Usuario usuario, MetodoPago metodoPago, Categoria categoria,
-            Comercio comercio) {
+    public Gasto(String descripcion, Double valor, Categoria categoria,
+        MetodoPago metodoPago, Comercio comercio,  Usuario usuario) {
         this.descripcion = descripcion;
         this.valor = valor;
-        this.usuario = usuario;
-        this.metodoPago = metodoPago;
         this.categoria = categoria;
+        this.metodoPago = metodoPago;
         this.comercio = comercio;
+        this.usuario = usuario;
+        this.fecha = LocalDateTime.now();
+    
     }
-
 
     //GETTER AND SETTER
     public Long getId() {
@@ -82,12 +81,12 @@ public class Gasto {
     }
 
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

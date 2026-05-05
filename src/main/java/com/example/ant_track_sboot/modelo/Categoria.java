@@ -1,11 +1,8 @@
 package com.example.ant_track_sboot.modelo;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
 import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -32,9 +29,6 @@ public class Categoria {
     @Column(nullable = false)
     private Estado estado;
 
-    @Column(nullable = false)
-    private LocalDateTime fechaCreacion;
-
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Gasto> gastos;
@@ -45,21 +39,21 @@ public class Categoria {
     }
 
     //CONSTRUCTOR FULL
-    public Categoria(String nombre, String descripcion, double presupuestoMaximoMensual, double gastoMensual
-            ) {
+   
+   
+
+    public Categoria(String nombre, String descripcion, double presupuestoMaximoMensual, 
+        double gastoMensual ) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.presupuestoMaximoMensual = presupuestoMaximoMensual;
         this.gastoMensual = gastoMensual;
-
-        //ESTADO Y FECHA LO MANDAMOS POR DEFECTO DESDE EL CREATE
-        
-    }
+        this.estado = Estado.ACTIVO; //por default
+     }
 
     public Long getId() {
         return id;
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -92,18 +86,6 @@ public class Categoria {
         this.gastoMensual = gastoMensual;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public List<Gasto> getGastos() {
-        return gastos;
-    }
-
-    public void setGastos(List<Gasto> gastos) {
-        this.gastos = gastos;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -116,8 +98,8 @@ public class Categoria {
         this.estado = estado;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public List<Gasto> getGastos() {
+        return gastos;
     }
     
 }

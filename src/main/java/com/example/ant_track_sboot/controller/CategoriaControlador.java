@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/anttrackapi/v1/categoria")
+@RequestMapping("/anttrackapi/v1/categorias")
 public class CategoriaControlador {
 
     @Autowired
@@ -27,7 +27,7 @@ public class CategoriaControlador {
     // Guardo para crear categorias
     @PostMapping
     public ResponseEntity<?> controladorGuardarCategoria(@RequestBody Categoria datos) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaServicio.guardar(datos));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaServicio.crearCategoria(datos));
     }
 
     // 2. LISTAR TODOS:  Me devuelve la lista completa 
@@ -44,7 +44,7 @@ public class CategoriaControlador {
 
     @PutMapping("/{id}")
     public ResponseEntity<?>controladorModificarCategoria(@PathVariable Long id, @RequestBody Categoria datos) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.editar(id, datos));
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.editarCategoria(id, datos));
     }
 
     @DeleteMapping("/{id}")

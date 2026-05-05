@@ -1,11 +1,8 @@
 package com.example.ant_track_sboot.DTO;
 
-import java.math.BigDecimal;
-
-
 public class GastoDTO {
     public String descripcion;
-    public BigDecimal valor;
+    public Double valor;
     public Long categoriaId;
     public Long metodoPagoId;
     public Long comercioId;
@@ -15,7 +12,7 @@ public class GastoDTO {
     public GastoDTO() {
     }
     
-    public GastoDTO(String descripcion, BigDecimal valor, Long categoriaId, Long metodoPagoId, Long comercioId,
+    public GastoDTO(String descripcion, Double valor, Long categoriaId, Long metodoPagoId, Long comercioId,
             Long usuarioId) {
         this.descripcion = descripcion;
         this.valor = valor;
@@ -30,10 +27,10 @@ public class GastoDTO {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
     public Long getCategoriaId() {
