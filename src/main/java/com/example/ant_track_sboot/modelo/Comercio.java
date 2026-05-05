@@ -1,6 +1,6 @@
 package com.example.ant_track_sboot.modelo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.ant_track_sboot.modelo.utils.Estado;
@@ -44,11 +44,11 @@ private String direccion;
 private String horarioAtencion;
 
 @Column(name = "fechaCreacion",nullable = false, unique = false)
-private LocalDate fechaCreacion;
+private LocalDateTime fechaCreacion;
 
 @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Estado estado;
+@Column(nullable = false)
+private Estado estado;
 
 
 //relacion bd
@@ -61,15 +61,22 @@ private List<Gasto> gastos;
 public Comercio() {
 }
 
-public Comercio(String nit, String nombreComercio, String telefono, String direccion, String horarioAtencion) {
+
+
+/*Creacion de get and set de cada dato */
+
+public Comercio(String nit, String nombreComercio, String telefono, String direccion, String horarioAtencion
+        ) {
     this.nit = nit;
     this.nombreComercio = nombreComercio;
     this.telefono = telefono;
     this.direccion = direccion;
     this.horarioAtencion = horarioAtencion;
+    this.fechaCreacion = LocalDateTime.now(); //no van en los parametros
+    this.estado = Estado.ACTIVO; // van por default
 }
 
-/*Creacion de get and set de cada dato */
+
 
 public String getNit() {
     return nit;
@@ -95,11 +102,11 @@ public void setDireccion(String direccion) {
     this.direccion = direccion;
 }
 
-public LocalDate getFechaCreacion() {
+public LocalDateTime getFechaCreacion() {
     return fechaCreacion;
 }
 
-public void setFechaCreacion(LocalDate fechaCreacion) {
+public void setFechaCreacion(LocalDateTime fechaCreacion) {
     this.fechaCreacion = fechaCreacion;
 }
 
@@ -137,10 +144,6 @@ public void setEstado(Estado estado) {
 
 public List<Gasto> getGastos() {
     return gastos;
-}
-
-public void setGastos(List<Gasto> gastos) {
-    this.gastos = gastos;
 }
 
 

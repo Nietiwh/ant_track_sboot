@@ -10,7 +10,7 @@ import com.example.ant_track_sboot.modelo.Comercio;
 
 
 @Repository
-public interface IComercioRepositorio extends JpaRepository <Comercio, Integer> {
+public interface IComercioRepositorio extends JpaRepository <Comercio, Long> {
 
     //ya este codigo es capaz de realizar las operaciones basicas de CRUD
     //  (Guardar, Buscar por ID, Buscar todos los registros, Modificar,
@@ -29,10 +29,6 @@ Optional<Comercio> findByNit(String nit);
 //buscar por nombres que contengan nnn(lista)
 List<Comercio> findByNombreComercioContaining(String nombreComercio);
 
-/* 
-esta malo no existe
-//buscar por edad(lista)
-List<Comercio> findByEdad(int edad);
-*/
+
 
 }

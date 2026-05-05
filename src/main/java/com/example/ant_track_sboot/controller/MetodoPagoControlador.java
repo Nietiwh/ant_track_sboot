@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/ant_track_sboot/metodoPago")
+@RequestMapping("/anttrackapi/v1/metodopagos")
 // Inyectar el servicio de MetodoPago
 // Implementar los métodos para manejar las solicitudes HTTP (GET, POST,
 // PUT, DELETE)

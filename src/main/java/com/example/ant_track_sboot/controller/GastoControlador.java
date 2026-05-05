@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.ant_track_sboot.modelo.Gasto;
+import com.example.ant_track_sboot.DTO.GastoDTO;
 import com.example.ant_track_sboot.servicio.GastoServicio;
 
 
@@ -29,7 +28,7 @@ public class GastoControlador {
     //esa funcion recibe peticiones y responde
 
     @PostMapping
-    public ResponseEntity<?> saveGasto(@RequestBody Gasto datos){
+    public ResponseEntity<?> saveGasto(@RequestBody GastoDTO datos){
         return ResponseEntity.status(HttpStatus.OK).body(
             gastoServicio.guardarGasto(datos)
         );
@@ -50,10 +49,4 @@ public class GastoControlador {
     );
    }
 
-
-    
-
-
-
-    
 }

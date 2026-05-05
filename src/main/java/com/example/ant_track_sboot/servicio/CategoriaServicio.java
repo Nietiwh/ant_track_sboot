@@ -1,8 +1,8 @@
 package com.example.ant_track_sboot.servicio;
 
 import com.example.ant_track_sboot.modelo.Categoria;
+import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.example.ant_track_sboot.repositorio.ICategoriaRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @Service //le dice a Spring que esta clase es un servicio.
 public class CategoriaServicio{
 
-    @Autowired //anotación para inyección de dependencias.
+   
     private ICategoriaRepositorio categoriaRepositorio;
 
     //inyeccion CONSTRUCTOR
@@ -21,22 +21,23 @@ public class CategoriaServicio{
         this.categoriaRepositorio = categoriaRepository;
     }
 
-    // 4. BUSCAR TODOS
+    // 1. BUSCAR TODOS
    
     public List<Categoria> buscarTodos() {
         return categoriaRepositorio.findAll();
     }
 
-    // 1. GUARDAR
+    // 2. GUARDAR
    
-    public Categoria guardar(Categoria categoria) {
+    public Categoria crearCategoria(Categoria categoria) {
         return categoriaRepositorio.save(categoria);
     }
 
-    // 2. BUSCAR POR ID
-     //indica que este método viene de la interfaz.
+    // 3. BUSCAR POR ID
+  
     public Categoria buscarPorId(Long id) {
         Optional <Categoria> categoriaBuscar = categoriaRepositorio.findById(id);
+
         if(categoriaBuscar.isEmpty()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }else{
@@ -45,28 +46,53 @@ public class CategoriaServicio{
     }
 
    
-    // 5. EDITAR
+    // 4. EDITAR
    
-    public Categoria editar(Long id, Categoria categoriaActualizada) {
+    public Categoria editarCategoria(Long id, Categoria categoriaActualizada) {
         Categoria categoriaExistente = buscarPorId(id);
 
         categoriaExistente.setNombre(categoriaActualizada.getNombre());
         categoriaExistente.setDescripcion(categoriaActualizada.getDescripcion());
         categoriaExistente.setPresupuestoMaximoMensual(categoriaActualizada.getPresupuestoMaximoMensual());
         categoriaExistente.setGastoMensual(categoriaActualizada.getGastoMensual());
-
+       
         return categoriaRepositorio.save(categoriaExistente);
     }
 
-    // 6. ELIMINAR
-  
+    // 5. ELIMINAR para desarrollo
+      
     public boolean eliminar(Long id) {
-     Optional<Categoria> categoriaBuscar = categoriaRepositorio.findById(id);
-     if(categoriaBuscar.isPresent()){
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-     }else{
-        categoriaRepositorio.deleteById(id);
-        return true;
-     }
+        Optional<Categoria> categoriaBuscar = categoriaRepositorio.findById(id);
+        if(!categoriaBuscar.isPresent()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }else{
+            categoriaRepositorio.deleteById(id);
+            return true;
+        }
     }
+
+    // 5. activar 
+      
+    public boolean activaCategoria(Long id) {
+        Optional<Categoria> categoriaBuscar = categoriaRepositorio.findById(id);
+        if(!categoriaBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+           Categoria categoriaActivar = categoriaBuscar.get();
+           categoriaActivar.setEstado(Estado.ACTIVO);
+           categoriaRepositorio.save(categoriaActivar);
+           return true;
+       }
+       // 6. desactivasr
+      
+    public boolean desactivaCategoria(Long id) {
+        Optional<Categoria> categoriaBuscar = categoriaRepositorio.findById(id);
+        if(!categoriaBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+           Categoria categoriaDesaActivar = categoriaBuscar.get();
+           categoriaDesaActivar.setEstado(Estado.INACTIVO);
+           categoriaRepositorio.save(categoriaDesaActivar);
+           return true;
+       }
 }

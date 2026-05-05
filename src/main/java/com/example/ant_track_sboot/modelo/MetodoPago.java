@@ -60,15 +60,19 @@ public class MetodoPago {
     public MetodoPago() {
     }
 
-    //CONSTRUCTOR FULL , EL ESTADO LO AMNDAMOS POR DEFECTO EN EL CRUD
-    public MetodoPago(MedioPago formaPago, Franquicia franquicia, String descripcion) {
-        this.formaPago = formaPago;
-        this.franquicia = franquicia;
-        this.descripcion = descripcion;
-    }
+    //CONSTRUCTOR FULL 
+    
+    
 
     public Long getId() {
         return id;
+    }
+
+    public MetodoPago(MedioPago formaPago, Franquicia franquicia, String descripcion) {
+        this.formaPago = formaPago;
+        this.franquicia = franquicia;
+        this.estado = Estado.ACTIVO; // va por defecto no va en parametros
+        this.descripcion = descripcion;
     }
 
     public void setId(Long id) {
@@ -111,10 +115,6 @@ public class MetodoPago {
         return gastos;
     }
 
-    public void setGastos(List<Gasto> gastos) {
-        this.gastos = gastos;
-    }
-
-    
+       
 
 }

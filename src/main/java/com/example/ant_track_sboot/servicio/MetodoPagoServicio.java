@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.example.ant_track_sboot.modelo.MetodoPago;
 import com.example.ant_track_sboot.modelo.utils.Estado;
 import com.example.ant_track_sboot.modelo.utils.Franquicia;
@@ -84,14 +83,15 @@ public class MetodoPagoServicio {
         Optional<MetodoPago> metodoPagoExistenteOpt = repositorio.findById(id);
         if (!metodoPagoExistenteOpt.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Método de pago no encontrado con ID: " + id);
-        } else {
-            MetodoPago metodoPagoExistente = metodoPagoExistenteOpt.get();
-            metodoPagoExistente.setFormaPago(metodoPagoActualizado.getFormaPago());
-            metodoPagoExistente.setFranquicia(metodoPagoActualizado.getFranquicia());
-            metodoPagoExistente.setEstado(metodoPagoActualizado.getEstado());
-            metodoPagoExistente.setDescripcion(metodoPagoActualizado.getDescripcion());
-            return repositorio.save(metodoPagoExistente);
         }
+
+        MetodoPago metodoPagoExistente = metodoPagoExistenteOpt.get();
+        metodoPagoExistente.setFormaPago(metodoPagoActualizado.getFormaPago());
+        metodoPagoExistente.setFranquicia(metodoPagoActualizado.getFranquicia());
+        metodoPagoExistente.setDescripcion(metodoPagoActualizado.getDescripcion());
+        
+        return repositorio.save(metodoPagoExistente);
+        
     }
 
     // 5. ELIMINAR un método de pago por su ID
@@ -129,4 +129,31 @@ public class MetodoPagoServicio {
     public List<MetodoPago> buscarPorFormaPago(MedioPago formaPago) {
         return repositorio.findByFormaPago(formaPago.name());
     }
+
+    // 11. activar 
+      
+    public boolean activaMetodoPago(Long id) {
+        Optional<MetodoPago> metodoPagoBuscar = repositorio.findById(id);
+        if(!metodoPagoBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        MetodoPago metodoPagoActivar = metodoPagoBuscar.get();
+        metodoPagoActivar.setEstado(Estado.ACTIVO);
+           repositorio.save(metodoPagoActivar);
+           return true;
+       }
+       // 12. desactivasr
+      
+    public boolean desactivaMetodoPago(Long id) {
+        Optional<MetodoPago> metodoPagoBuscar = repositorio.findById(id);
+        if(!metodoPagoBuscar.isPresent()){
+           throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        MetodoPago metodoPagoDesaActivar = metodoPagoBuscar.get();
+        metodoPagoDesaActivar.setEstado(Estado.INACTIVO);
+           repositorio.save(metodoPagoDesaActivar);
+           return true;
+       }
+
+    
 }

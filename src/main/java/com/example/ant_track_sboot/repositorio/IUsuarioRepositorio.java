@@ -12,7 +12,7 @@ import com.example.ant_track_sboot.modelo.Usuario;
  * Proporciona métodos CRUD automáticos gracias a JpaRepository.
  */
 @Repository
-public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioRepositorio extends JpaRepository<Usuario, Long> {
      // No es necesario agregar métodos aquí a menos que necesites consultas personalizadas (Query Methods)
 
     //Buscar por nombre exacto (1)
@@ -25,6 +25,8 @@ public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
    List<Usuario> findByNombreContaining(String nombre);
     //buscar por edad (lista)
     List<Usuario> findByEdad(Integer edad);
+
+    List<Usuario> findByCorreo(String correo);
 
 
    
