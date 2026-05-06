@@ -24,6 +24,8 @@ public interface IGastoRepositorio extends JpaRepository<Gasto, Long >{
 
     List<Gasto> findByDescripcionContaining(String descripcion);
 
+    List<Gasto> findByUsuarioId(Long idUsuario);
+
     
 
 

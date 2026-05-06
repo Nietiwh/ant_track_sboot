@@ -140,6 +140,14 @@ public class GastoServicio {
         Gasto gasto = buscarPorId(id);
         gastoRepositorio.delete(gasto);
     }
+
+     // 4. BUSCAR POR ATRIBUTO (nombre parcial)
+   
+     public List<Gasto> buscarPorID(Long id) {
+        return gastoRepositorio.findByUsuarioId(id);
+    }
+
+    
 }
 
 

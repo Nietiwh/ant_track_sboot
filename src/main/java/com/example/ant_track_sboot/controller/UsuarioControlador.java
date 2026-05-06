@@ -1,5 +1,6 @@
 package com.example.ant_track_sboot.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ public class UsuarioControlador {
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+   
 
     // CREAR USUARIO
     @PostMapping
@@ -57,5 +59,7 @@ public class UsuarioControlador {
             usuarioServicio.eliminar_usuario(id)
         );
     }
+
+    
 
 }
