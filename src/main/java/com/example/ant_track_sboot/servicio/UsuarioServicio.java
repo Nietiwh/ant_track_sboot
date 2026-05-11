@@ -62,9 +62,10 @@ public class UsuarioServicio {
         u.setCorreo(datos.getCorreo());
         u.setDocumento(datos.getDocumento());
         u.setTipoDocumento(datos.getTipoDocumento());
-        u.setEdad(datos.getEdad());
-        u.setGenero(datos.getGenero());
         u.setTelefono(datos.getTelefono());
+        u.setDireccion(datos.getDireccion());
+        u.setGenero(datos.getGenero());
+        u.setEdad(datos.getEdad());
         u.setPresupMensual(datos.getPresupMensual());
 
 
