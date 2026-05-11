@@ -26,7 +26,10 @@ public interface IUsuarioRepositorio extends JpaRepository<Usuario, Long> {
     //buscar por edad (lista)
     List<Usuario> findByEdad(Integer edad);
 
-    List<Usuario> findByCorreo(String correo);
+    
+    Optional<Usuario> findByCorreo(String correo);
+
+    
 
 
    

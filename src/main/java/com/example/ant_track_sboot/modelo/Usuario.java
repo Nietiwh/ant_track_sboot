@@ -1,12 +1,12 @@
 package com.example.ant_track_sboot.modelo;
 
 import java.util.List;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
-
 import com.example.ant_track_sboot.modelo.utils.Estado;
+import com.example.ant_track_sboot.modelo.utils.Role;
 import com.example.ant_track_sboot.modelo.utils.TipoDocumento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -39,6 +39,8 @@ public class Usuario {
 
     @Column(nullable = false)
     private String telefono;
+    @Column(nullable = false)
+    private String  direccion;
 
     @Column(nullable = false)
     private BigDecimal presupMensual;
@@ -50,8 +52,16 @@ public class Usuario {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado", nullable = false)
+    @Column( nullable = false)
     private Estado estado;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role rol;
+
+    @Column(name = "ultimo_acceso")
+    private LocalDateTime ultimoAcceso;
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
@@ -64,8 +74,9 @@ public class Usuario {
     
 
     public Usuario(String nombre, TipoDocumento tipoDocumento, String documento, 
-                    Integer edad, String genero,String correo,
-                     String telefono, BigDecimal presupMensual, String password
+                    Integer edad, String genero,String correo, String telefono, 
+                    String direccion,  BigDecimal presupMensual,
+                      String password
                  ) {
         this.nombre = nombre;
         this.tipoDocumento = tipoDocumento;
@@ -74,10 +85,13 @@ public class Usuario {
         this.genero = genero;
         this.correo = correo;
         this.telefono = telefono;
+        this.direccion = direccion;
         this.presupMensual = presupMensual;
         this.password = password;
         this.estado = Estado.ACTIVO;
         this.fechaRegistro = LocalDateTime.now();
+        this.ultimoAcceso = LocalDateTime.now();
+        this.rol = Role.USER;
     }
 
 
@@ -180,6 +194,23 @@ public class Usuario {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+
+
+    public Role getRol() {
+        return rol;
+    }
+
+ 
+    public String getDireccion() {
+        return direccion;
+    }
+
+
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
    
