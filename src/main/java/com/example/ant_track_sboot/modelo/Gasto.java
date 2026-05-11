@@ -1,5 +1,6 @@
 package com.example.ant_track_sboot.modelo;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -23,7 +24,7 @@ public class Gasto {
     private String descripcion;
 
     @Column(name = "valor", nullable = false) //Columna obligatoria
-    private Double valor;
+    private BigDecimal valor;
     
     @Column(name = "fecha_gasto", nullable = false ) //Columna obligatoria
     private LocalDateTime fecha;
@@ -48,7 +49,7 @@ public class Gasto {
     //Constructor vacio
     public Gasto() {
     }
-    public Gasto(String descripcion, Double valor, Categoria categoria,
+    public Gasto(String descripcion, BigDecimal valor, Categoria categoria,
         MetodoPago metodoPago, Comercio comercio,  Usuario usuario) {
         this.descripcion = descripcion;
         this.valor = valor;
@@ -81,12 +82,12 @@ public class Gasto {
     }
 
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

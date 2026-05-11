@@ -22,9 +22,6 @@ public class Categoria {
     @Column(nullable = false)
     private double presupuestoMaximoMensual;
 
-    @Column(nullable = false)
-    private double gastoMensual;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Estado estado;
@@ -47,7 +44,6 @@ public class Categoria {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.presupuestoMaximoMensual = presupuestoMaximoMensual;
-        this.gastoMensual = gastoMensual;
         this.estado = Estado.ACTIVO; //por default
      }
 
@@ -76,14 +72,6 @@ public class Categoria {
 
     public void setPresupuestoMaximoMensual(double presupuestoMaximoMensual) {
         this.presupuestoMaximoMensual = presupuestoMaximoMensual;
-    }
-
-    public double getGastoMensual() {
-        return gastoMensual;
-    }
-
-    public void setGastoMensual(double gastoMensual) {
-        this.gastoMensual = gastoMensual;
     }
 
     public void setId(Long id) {
