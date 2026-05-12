@@ -52,4 +52,14 @@ public class CategoriaControlador {
     public ResponseEntity<?>controladorEliminarCategoria(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.eliminar(id));
     }
+
+    @PutMapping("/{id}/desactivar")
+    public ResponseEntity<?> desactivarCategoria(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.desactivaCategoria(id));
+    }
+
+    @PutMapping("/{id}/activar")
+    public ResponseEntity<?> activarCategoria(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.activaCategoria(id));
+    }
 }
