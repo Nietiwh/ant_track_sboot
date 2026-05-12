@@ -62,6 +62,15 @@ public class UsuarioControlador {
         );
     }
 
+    @PutMapping("/{id}/desactivar")
+    public ResponseEntity<?> desactivarUsuario(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.desactivaUsuario(id));
+    }
+
+    @PutMapping("/{id}/activar")
+    public ResponseEntity<?> activarUsuario(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.activaUsuario(id));
+    }
     
 
 }

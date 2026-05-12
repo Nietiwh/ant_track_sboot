@@ -87,6 +87,16 @@ public class ComercioControlador {
                 comercioServicio.buscar_comercio_id(id)
             );
         }
+
+        @PutMapping("/{id}/desactivar")
+    public ResponseEntity<?> desactivarComercio(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(comercioServicio.desactivaComercio(id));
+    }
+
+    @PutMapping("/{id}/activar")
+    public ResponseEntity<?> activarComercio(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(comercioServicio.activaComercio(id));
+    }
     }
 
 
